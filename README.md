@@ -4,7 +4,6 @@
 [![Kernel](https://img.shields.io/badge/Kernel-6.12.30-red?logo=linux&logoColor=white)](https://kernel.org/)
 [![Sublevel](https://img.shields.io/badge/Sublevel-30-orange)](https://kernel.org/)
 [![SPL](https://img.shields.io/badge/SPL-2025--07-success)](https://source.android.com/docs/security/bulletin)
-[![Branch](https://img.shields.io/badge/Branch-android16--6.12--2025--07-blueviolet)](https://github.com/abidhasansojib/android_kernel_common-6.12.30-android16/tree/android16-6.12-2025-07)
 
 Android 16 Generic Kernel Image (GKI) common kernel source tree based on Linux **6.12.30** (Sublevel `30`, OS Patch Level `2025-07`).
 
