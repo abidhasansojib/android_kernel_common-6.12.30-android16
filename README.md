@@ -20,9 +20,10 @@ This repository provides the standalone Android 16 Generic Kernel Image (GKI) co
 | **Release Target** | `6.12.30-android16` | Canonical GKI release string |
 | **Kernel Sublevel** | `30` | Validated against OEM vendor module sublevel checks |
 | **OS Patch Level (SPL)** | `2025-07` | Synchronized with July 2025 AOSP security bulletins |
-| **AOSP Superproject Branch** | `common-android16-6.12-2025-07` | Upstream AOSP kernel manifest branch |
-| **Upstream Base Commit** | [`eed0fa659bd0`](https://android.googlesource.com/kernel/common/+/eed0fa659bd00244386a3cfaa70b680a8b04c59f) | Pinned `kernel/common` upstream revision |
-| **Upstream Source** | [`https://android.googlesource.com/kernel/common`](https://android.googlesource.com/kernel/common) | Official Google Android Common Kernel repository |
+| **Upstream Source (Tree)** | [`kernel/common @ eed0fa659bd0`](https://android.googlesource.com/kernel/common/+/eed0fa659bd00244386a3cfaa70b680a8b04c59f) | Direct GoogleSource source tree for Linux 6.12.30 |
+| **AOSP Superproject** | [`common-android16-6.12-2025-07`](https://android.googlesource.com/kernel/superproject/+/refs/heads/common-android16-6.12-2025-07) | Upstream AOSP superproject branch |
+| **AOSP Kernel Manifest** | [`kernel/manifest (2025-07)`](https://android.googlesource.com/kernel/manifest/+/refs/heads/common-android16-6.12-2025-07) | Official manifest branch used by `repo init` |
+| **AOSP Common Tag** | [`android16-6.12.30_r00`](https://android.googlesource.com/kernel/common/+/refs/tags/android16-6.12.30_r00) | Official Android 16 6.12.30 release tag |
 | **Target Architecture** | `arm64` (`aarch64`) | 64-bit ARM architecture |
 | **Primary Tested Device** | **Redmi Note 14 4G (`tanzanite`)** | MediaTek Helio G99 (`MT6789`) on Xiaomi HyperOS 3 |
 
