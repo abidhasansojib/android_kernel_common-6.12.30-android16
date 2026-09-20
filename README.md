@@ -7,25 +7,25 @@
 [![Tag](https://img.shields.io/badge/Tag-v6.12.30--android16-brightgreen?logo=git)](https://github.com/abidhasansojib/android_kernel_common-6.12.30-android16/releases/tag/v6.12.30-android16)
 [![Builder](https://img.shields.io/badge/Built_With-gki__kernel__builder-purple?logo=github)](https://github.com/abidhasansojib/gki_kernel_builder)
 
-This repository provides the standalone Android 16 Generic Kernel Image (GKI) common kernel source tree based on Linux **6.12.30** (`6.12.30-android16`, OS Patch Level `2025-07`), designed for development, inspection, and compilation workflows with [gki_kernel_builder](https://github.com/abidhasansojib/gki_kernel_builder).
+This repository contains the standalone Android 16 Generic Kernel Image (GKI) common kernel source tree based on Linux **6.12.30** (`6.12.30-android16`, OS Patch Level `2025-07`).
 
 ---
 
-## 🎯 Target Kernel Specifications
+## 🎯 Kernel Specifications
 
 | Specification | Value | Details |
 | :--- | :--- | :--- |
-| **Android Version** | `Android 16` (`android16`) | AOSP Generic Kernel Image (GKI) architecture |
-| **Linux Kernel Version** | `6.12.30` | Linux LTS base release |
-| **Release Target** | `6.12.30-android16` | Canonical GKI release string |
+| **Android Version** | `Android 16` (`android16`) | AOSP Generic Kernel Image (GKI) standard |
+| **Linux Kernel Version** | `6.12.30` | Linux LTS baseline |
+| **Target Build Release** | `6.12.30-android16` | Canonical release identifier |
 | **Kernel Sublevel** | `30` | Validated against OEM vendor module sublevel checks |
 | **OS Patch Level (SPL)** | `2025-07` | Synchronized with July 2025 AOSP security bulletins |
 | **Upstream Source (Tree)** | [`kernel/common @ eed0fa659bd0`](https://android.googlesource.com/kernel/common/+/eed0fa659bd00244386a3cfaa70b680a8b04c59f) | Direct GoogleSource source tree for Linux 6.12.30 |
-| **AOSP Superproject** | [`common-android16-6.12-2025-07`](https://android.googlesource.com/kernel/superproject/+/refs/heads/common-android16-6.12-2025-07) | Upstream AOSP superproject branch |
-| **AOSP Kernel Manifest** | [`kernel/manifest (2025-07)`](https://android.googlesource.com/kernel/manifest/+/refs/heads/common-android16-6.12-2025-07) | Official manifest branch used by `repo init` |
+| **AOSP Superproject Branch** | [`common-android16-6.12-2025-07`](https://android.googlesource.com/kernel/superproject/+/refs/heads/common-android16-6.12-2025-07) | Upstream AOSP superproject branch |
+| **AOSP Kernel Manifest Branch** | [`kernel/manifest (2025-07)`](https://android.googlesource.com/kernel/manifest/+/refs/heads/common-android16-6.12-2025-07) | Official manifest branch used by `repo init` |
 | **AOSP Common Tag** | [`android16-6.12.30_r00`](https://android.googlesource.com/kernel/common/+/refs/tags/android16-6.12.30_r00) | Official Android 16 6.12.30 release tag |
 | **Target Architecture** | `arm64` (`aarch64`) | 64-bit ARM architecture |
-| **Primary Tested Device** | **Redmi Note 14 4G (`tanzanite`)** | MediaTek Helio G99 (`MT6789`) on Xiaomi HyperOS 3 |
+| **Primary Tested Device** | **Redmi Note 14 4G (`tanzanite`)** | MediaTek MT6789 (Helio G99) on Xiaomi HyperOS 3 |
 
 ---
 
@@ -43,45 +43,16 @@ git clone --depth=1 --branch v6.12.30-android16 https://github.com/abidhasansoji
 
 ---
 
-## 🏗️ Integration with `gki_kernel_builder`
+## 🏗️ Usage with `gki_kernel_builder`
 
-This kernel source tree matches the configuration expected by [gki_kernel_builder](https://github.com/abidhasansojib/gki_kernel_builder), which automates:
+This kernel source is designed to be built with [gki_kernel_builder](https://github.com/abidhasansojib/gki_kernel_builder), which provides:
 * **Root Flavors**: SukiSU-Ultra (Default), KernelSU-Next, and ReSukiSU.
 * **Stealth & Isolation**: In-tree SUSFS v2.3.0 and NoMount metamodule.
-* **Kali NetHunter**: Monitor mode, packet injection, BadUSB HID (`/dev/hidg1` keyboard, `/dev/hidg2` mouse), SDR, and SocketCAN.
-* **Vendor Version Bypass**: Integrated vendor module version-check bypass hack (`bad_version: return 1;`).
+* **Kali NetHunter**: Wireless drivers (75+ Wi-Fi adapters), BadUSB HID (`/dev/hidg1` keyboard, `/dev/hidg2` mouse), SDR, and SocketCAN.
+* **Vendor Bypass**: Built-in vendor module version-check bypass hack (`bad_version: return 1;`).
 
 ---
 
-<details>
-<summary><b>📜 Upstream Android Common Kernel Patch Guidelines (Click to Expand)</b></summary>
-<br>
+## 📜 Upstream Patch Guidelines
 
-### How do I submit patches to Android Common Kernels
-
-1. BEST: Make all of your changes to upstream Linux. If appropriate, backport to the stable releases.
-   These patches will be merged automatically in the corresponding common kernels. If the patch is already
-   in upstream Linux, post a backport of the patch that conforms to the patch requirements below.
-   - Do not send patches upstream that contain only symbol exports. To be considered for upstream Linux,
-     additions of `EXPORT_SYMBOL_GPL()` require an in-tree modular driver that uses the symbol -- so include
-     the new driver or changes to an existing driver in the same patchset as the export.
-   - When sending patches upstream, the commit message must contain a clear case for why the patch
-     is needed and beneficial to the community. Enabling out-of-tree drivers or functionality is not
-     a persuasive case.
-
-2. LESS GOOD: Develop your patches out-of-tree (from an upstream Linux point-of-view). Unless these are
-   fixing an Android-specific bug, these are very unlikely to be accepted unless they have been
-   coordinated with kernel-team@android.com. If you want to proceed, post a patch that conforms to the
-   patch requirements below.
-
-### Common Kernel patch requirements
-
-- All patches must conform to the Linux kernel coding standards and pass `scripts/checkpatch.pl`
-- Patches shall not break gki_defconfig or allmodconfig builds for arm, arm64, x86, x86_64 architectures
-- If the patch is not merged from an upstream branch, the subject must be tagged with the type of patch:
-  `UPSTREAM:`, `BACKPORT:`, `FROMGIT:`, `FROMLIST:`, or `ANDROID:`.
-- All patches must have a `Change-Id:` tag
-- If an Android bug has been assigned, there must be a `Bug:` tag.
-- All patches must have a `Signed-off-by:` tag by the author and the submitter
-
-</details>
+The original AOSP kernel patch submission requirements and guidelines are preserved in [**SUBMITTING_PATCHES.md**](SUBMITTING_PATCHES.md).
